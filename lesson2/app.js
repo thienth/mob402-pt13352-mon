@@ -19,6 +19,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/* ========Config mongodb=============*/
+var mongoose = require('mongoose');
+let dev_db_url = 'mongodb://localhost:27017/pt13352';
+let mongoDB = process.env.MONGODB_URI || dev_db_url;
+mongoose.connect(mongoDB, {useNewUrlParser: true, useCreateIndex: true});
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+/* =====================*/
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
