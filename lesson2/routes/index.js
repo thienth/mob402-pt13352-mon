@@ -3,6 +3,7 @@ var router = express.Router();
 var Category = require('../models/category');
 
 var multer = require('multer');
+var shortid = require('shortid');
 // config noi luu tru va ten anh upload len
 var storage = multer.diskStorage({
   // noi luu tru
@@ -11,7 +12,7 @@ var storage = multer.diskStorage({
   },
   // cau hinh ten file - giu nguyen ten file goc
   filename: function(req, file, cb){
-    cb(null, file.originalname);
+    cb(null, shortid.generate() + "--" + file.originalname);
   }
 });
 
@@ -34,24 +35,22 @@ router.get('/cates/add', function(req, res, next){
 });
 
 router.post('/cates/save-add', upload.single('image') ,function(req, res, next){
-  res.json(req.file);
-
   // 2. Tao model
-  // var model = new Category();
+  var model = new Category();
 
-  // // 3. gan gia tri cho model
-  // model.name = req.body.name;
-  // model.image = req.body.image;
-  // model.description = req.body.description;
+  // 3. gan gia tri cho model
+  model.name = req.body.name;
+  model.image = req.file.path.replace('public', '');
+  model.description = req.body.description;
 
-  // // 4. Luu
-  // model.save(function(err){
-  //   if(err){
-  //     res.send('Luu khong thanh cong');
-  //   }
+  // 4. Luu
+  model.save(function(err){
+    if(err){
+      res.send('Luu khong thanh cong');
+    }
 
-  //   res.redirect('/cates');
-  // })
+    res.redirect('/cates');
+  })
 })
 
 router.get('/cates/remove/:cId', function(req, res, next){
