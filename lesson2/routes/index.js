@@ -14,6 +14,10 @@ router.get('/cates', function(req, res, next) {
   });
 });
 
+router.get('/cates/add', function(req, res, next){
+  res.render('category/add-form');
+});
+
 router.get('/cates/remove/:cId', function(req, res, next){
   Category.deleteOne({_id: req.params.cId}, function (err) {
     if (err) return handleError(err);

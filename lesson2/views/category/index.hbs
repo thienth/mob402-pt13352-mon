@@ -1,19 +1,17 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Image</th>
       <th scope="col">Description</th>
       <th scope="col">
-          <a href="/cates/add" class="btn btn-danger">Thêm</a>
+          <a href="/cates/add" class="btn btn-success">Thêm</a>
       </th>
     </tr>
   </thead>
   <tbody>
       {{#each cates}}
         <tr>
-            <th scope="row">1</th>
             <td>{{this.name}}</td>
             <td>
                 <img src="{{this.image}}" width="100" class="img-thumbnail">
