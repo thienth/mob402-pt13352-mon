@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 offset-2">
+            <form action="/cates/save-edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{{cate._id}}">
+                <div class="form-group">
+                    <label for="">Tên danh mục</label>
+                    <input type="text" name="name" value="{{cate.name}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div style="width: 200px">
+                        <img src="{{cate.image}}" class="img-thumbnail">
+                    </div>
+                    <label for="">Ảnh danh mục</label>
+                    <input type="file" name="image" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">Mô tả</label>
+                    <textarea name="description" class="form-control" rows="10">{{cate.description}}</textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-sm btn-primary">Lưu</button>
+                    <a href="/cates" class="btn btn-sm btn-danger">Hủy</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

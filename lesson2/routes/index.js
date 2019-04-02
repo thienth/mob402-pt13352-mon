@@ -34,6 +34,17 @@ router.get('/cates/add', function(req, res, next){
   res.render('category/add-form');
 });
 
+router.get('/cates/edit/:cId', function(req, res, next){
+  Category.findOne({_id: req.params.cId}, function(err, data){
+
+    if(err){
+      res.send('ID khong ton tai');
+    }
+    // res.json(data);
+    res.render('category/edit-form', {cate: data});
+  })
+});
+
 router.post('/cates/save-add', upload.single('image') ,function(req, res, next){
   // 2. Tao model
   var model = new Category();
