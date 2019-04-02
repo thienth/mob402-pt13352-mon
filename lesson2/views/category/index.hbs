@@ -19,7 +19,9 @@
             <td>{{this.description}}</td>
             <td>
                 <a href="/cates/edit/{{this._id}}" class="btn btn-sm btn-primary">Sửa</a>
-                <a href="javascript:void(0);" onclick="confirmDelete('/cates/remove/{{this._id}}', '{{this.name}}')" class="btn btn-sm btn-danger">Xóa</a>
+                <a href="javascript:void(0);" 
+                  onclick="confirmDelete('/cates/remove/{{this._id}}', '{{this.name}}')" 
+                  class="btn btn-sm btn-danger">Xóa</a>
             </td>
         </tr>
       {{/each}}
