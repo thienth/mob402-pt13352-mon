@@ -45,6 +45,28 @@ router.get('/cates/edit/:cId', function(req, res, next){
   })
 });
 
+router.post('/cates/save-edit', upload.single('image'), function(req, res, next){
+  Category.findOne({_id: req.body.id}, function(err, model){
+    if(err){
+      res.redirect('back');
+    }
+
+    model.name = req.body.name;
+    model.description = req.body.description;
+    if(req.file != null){
+      model.image = req.file.path.replace('public', '');
+    }
+
+    model.save(function(err){
+      if(err){
+        res.send('Luu khong thanh cong');
+      }
+
+      res.redirect('/cates');
+    })
+  })
+});
+
 router.post('/cates/save-add', upload.single('image') ,function(req, res, next){
   // 2. Tao model
   var model = new Category();
