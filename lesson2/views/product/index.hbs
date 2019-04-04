@@ -1,0 +1,38 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Product Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Detail</th>
+      <th scope="col">
+          <a href="/products/add" class="btn btn-success btn-sm">Thêm</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+    <tr>
+      <th scope="row">{{this.name}}</th>
+      <td>
+          <img src="{{this.image}}" width="100" class="img-thumbnail">
+      </td>
+      <td>
+          {{this.cate_id.name}}
+      </td>
+      <td>
+          {{this.price}}
+      </td>
+
+      <td>
+          {{this.detail}}
+      </td>
+      <td>
+          <a href="/products/edit/{{this._id}}" class="btn btn-sm btn-primary">Sửa</a>
+          <a href="/products/remove/{{this._id}}" class="btn btn-sm btn-danger">Xóa</a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
