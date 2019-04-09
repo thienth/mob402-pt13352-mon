@@ -35,24 +35,15 @@ router.get('/products/add', (req, res, next) => {
   })
 });
 
-router.get('/products/edit/:pId', (req, res, next) => {
-  Category.find({}, (err, data) => {
-
-    Product.findOne({_id: req.params.pId}, (err, productData) => {
-      if(err){
-        res.send('id san pham khong ton tai');
-      }
-
-      for(var i = 0; i < data.length; i++){
-        if(data[i]._id == productData.cate_id.toString()){
-          data[i].selected = true;
-        }
-      }
-
-      res.render('product/edit-form', {cates: data, product: productData});
-    });
-    
-  })
+router.get('/products/edit/:pId', async (req, res, next) => {
+  var cates = await Category.find({});
+  
+  var product = await Product.findOne({_id: req.params.pId});
+  if(cates == undefined || product == undefined){
+    res.send('Loi du lieu');
+  }
+  res.render('product/edit-form', {cates: cates, product: product});
+  
 });
 
 router.post('/products/save-add', upload.single('image'), (req, res, next) => {

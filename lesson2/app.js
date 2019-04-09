@@ -29,6 +29,34 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* =====================*/
 
+/* ============= hbs helpers  ============= */
+var hbs = require('hbs');
+hbs.registerHelper('check_room_status', (selectedData = -1) => {
+  var content = `<select name="room_status" class="form-control">`
+  content += `<option value="1"`
+  if(selectedData == 1){
+    content += ` selected `;
+  }
+  content+= `>Đã đặt</option>`;
+
+  content += `<option value="2"`
+  if(selectedData == 2){
+    content += ` selected `;
+  }
+  content+= `>Phòng trống</option>`;
+
+  content += `<option value="3"`
+  if(selectedData == 3){
+    content += ` selected `;
+  }
+  content+= `>Không sử dụng</option>`;
+  content += `</select>`;
+
+  return content;
+})
+
+/* ============= hbs helpers  ============= */
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
