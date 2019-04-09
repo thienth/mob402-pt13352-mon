@@ -1,10 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="col-8 offset-2">
-            <form action="/products/save-add" method="post" enctype="multipart/form-data">
+            <form action="/products/save-add" onsubmit="return validatedata()" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="">Tên sản phẩm</label>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" id="product_name" class="form-control">
+                    <span style="color: red;" id="pName-err"></span>
                 </div>
                 <div class="form-group">
                     <label for="">Danh mục</label>
@@ -38,5 +39,21 @@
             </form>
         </div>
     </div>
-
 </div>
+
+<script>
+    function validatedata(){
+        var pName = document.querySelector('#product_name').value;
+        if(pName == ""){
+            document.querySelector('#pName-err').innerText = "Vui lòng nhập tên sản phẩm";
+        }else if(pName < 4 || pName > 20){
+            document.querySelector('#pName-err').innerText = "Tên sản phẩm phải nằm trong khoảng 4-20 ký tự";
+        }
+        else{
+            document.querySelector('#pName-err').innerText = "";
+        }
+
+        return false;
+    }
+
+</script>
